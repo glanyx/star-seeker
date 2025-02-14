@@ -4,7 +4,7 @@ import { calculateTransport } from './actions'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
 import StraightenIcon from '@mui/icons-material/Straighten'
 import LocalParkingIcon from '@mui/icons-material/LocalParking'
-import { ITransport, ITransportCost } from '@/interfaces/travel'
+import { ITransportCost } from '@/interfaces/travel'
 
 const JourneyPlanner = ({
 
@@ -63,6 +63,7 @@ const JourneyPlanner = ({
               <div className='flex flex-row bg-gray-600 rounded-lg align-items-center'>
                 <label className='p-3 text-white'><StraightenIcon /></label>
                 <input className='pl-2 text-xl outline-none rounded-r-lg text-black'
+                  aria-label='distance'
                   type='number'
                   placeholder='Distance (in AU)'
                   onChange={(event) => setDistance(parseInt(event.target.value))}
@@ -74,6 +75,7 @@ const JourneyPlanner = ({
               <div className='flex flex-row bg-gray-600 rounded-lg align-items-center'>
                 <label className='p-3 text-white'><PeopleAltIcon /></label>
                 <input className='pl-2 text-xl outline-none rounded-r-lg text-black'
+                  aria-label='passengers'
                   type='number'
                   placeholder='Passengers'
                   onChange={(event) => setPassengers(parseInt(event.target.value))}
@@ -85,6 +87,7 @@ const JourneyPlanner = ({
               <div className='flex flex-row bg-gray-600 rounded-lg align-items-center'>
                 <label className='p-3 text-white'><LocalParkingIcon /></label>
                 <input className='pl-2 text-xl outline-none rounded-r-lg text-black'
+                  aria-label='parking'
                   type='number'
                   placeholder='Parking Days'
                   onChange={(event) => setParkingDays(parseInt(event.target.value))}
@@ -94,7 +97,7 @@ const JourneyPlanner = ({
             </div>
           </div>
           <div className='w-0'>
-            <button className='ml-6 px-4 py-3 bg-gray-700 hover:bg-gray-500 rounded-lg uppercase disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+            <button aria-label='search' className='ml-6 px-4 py-3 bg-gray-700 hover:bg-gray-500 rounded-lg uppercase disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
               type='submit'
             >
               <p>{loading ? 'Planning..' : 'Plan!'}</p>
