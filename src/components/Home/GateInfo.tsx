@@ -24,6 +24,11 @@ const GateInfo = ({
     code === expanded ? setExpanded('') : setExpanded(code)
   }
 
+  const parseTimestamp = (timestamp: number) => {
+    const date = new Date(timestamp)
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' : ''}${date.getMinutes()}`
+  }
+
   useEffect(() => {
     setLoading(true)
     fetchGateDetails().then(gates => {
@@ -79,8 +84,8 @@ const GateInfo = ({
                           <tbody>
                             <tr>
                               <td className='px-6 py-3'>{gateDetails.uuid}</td>
-                              <td className='px-6 py-3'>{new Date(gateDetails.createdAt).getTime()}</td>
-                              <td className='px-6 py-3'>{gateDetails.updatedAt ? new Date(gateDetails.updatedAt).getTime() : 'Never'}</td>
+                              <td className='px-6 py-3'>{`${parseTimestamp(gateDetails.createdAt)}`}</td>
+                              <td className='px-6 py-3'>{gateDetails.updatedAt ? parseTimestamp(gateDetails.updatedAt) : 'Never'}</td>
                               <td className='px-6 py-3'>{gateDetails.links?.length > 0 ? gateDetails.links.map(l => l.code).join(', ') : 'None'}</td>
                             </tr>
                           </tbody>

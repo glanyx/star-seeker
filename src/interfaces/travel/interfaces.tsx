@@ -10,7 +10,7 @@ export interface IGate {
   createdAt: number
   links: Array<IGateLink>
   name: string
-  updatedAt?: string
+  updatedAt?: number
 }
 
 export interface IJourney {
