@@ -158,6 +158,9 @@ const RoutePlanner = ({
         <div className='w-full bg-stone-800 p-4 rounded-t-lg'>
           <p className='font-bold'>History</p>
         </div>
+        {historicRoutes.trips.length === 0 && (
+          <p className='text-center py-4'>There is nothing to see here!</p>
+        )}
         {historicRoutes.trips.sort((a, b) => b.timestamp - a.timestamp).map(route => (
           <div key={route.timestamp} className='flex flex-col'>
             <div className='flex flex-row py-3 px-4 border-t-[1px] border-solid border-gray-900'>
