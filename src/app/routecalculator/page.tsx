@@ -1,5 +1,5 @@
 'use client'
-import { JourneyPlanner, RoutePlanner } from '@/components/Home'
+import { RoutePlanner } from '@/components/RoutePlanner'
 
 const RouteCalculator = ({
 

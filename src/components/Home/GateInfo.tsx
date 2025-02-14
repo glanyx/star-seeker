@@ -19,7 +19,7 @@ const GateInfo = ({
   const [gateDetails, setGateDetails] = useState<IGate>()
   const [detailsLoading, setDetailsLoading] = useState<boolean>(false)
 
-  const setExpandedState = (code: string) => {
+  const handleExpandedState = (code: string) => {
     code !== expanded && setDetailsLoading(true);
     code === expanded ? setExpanded('') : setExpanded(code)
   }
@@ -57,7 +57,7 @@ const GateInfo = ({
         <tbody>
           {!loading ? gates.map(gate => (
             <React.Fragment key={gate.uuid}>
-              <tr key={gate.code} onClick={() => setExpandedState(gate.code)} className='cursor-pointer hover:bg-neutral-700'>
+              <tr key={gate.code} onClick={() => handleExpandedState(gate.code)} className='cursor-pointer hover:bg-neutral-700'>
                 <td className='pl-6 py-3 w-16'>{gate.code}</td>
                 <td className='pl-2 pr-32 py-3'>{gate.name}</td>
                 <td className='px-6 py-3 text-right'>

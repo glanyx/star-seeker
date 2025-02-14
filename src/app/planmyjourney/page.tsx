@@ -1,5 +1,5 @@
 'use client'
-import { JourneyPlanner } from '@/components/Home'
+import { JourneyPlanner } from '@/components/JourneyPlanner'
 
 const TransportDistance = ({
 
