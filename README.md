@@ -1,4 +1,4 @@
-Welcome to Star Seeker, an application developed by Hyperspace Tunneling Corp., with [Next.js](https://nextjs.org), and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Welcome to [Star Seeker](http://ec2-13-40-33-185.eu-west-2.compute.amazonaws.com/), an application developed by Hyperspace Tunneling Corp., with [Next.js](https://nextjs.org), and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 Thank you for choosing us to plan your interstellar journey. We couldn't be more pleased to take your credits. Err, help you with your trip across the stars! Start your cosmic adventure now!
 
@@ -49,3 +49,7 @@ For storing historical searches, I went with a local storage approach. This is p
 The website is designed in a responsive way, thanks to the utilisation of Tailwind CSS throughout the application.
 
 I also edited the standard Layout to always include the website logo, as well as including a Footer component that always directs to the Homepage. All parts of the application can be reached from the Homepage.
+
+The API information is currently stored in the compose.yaml file. Of course, this is not a good implementation, however it is also not a real-world scenario where the key is predefined for everyone at one specific value.
+
+In terms of deployment, first a private key was generated on AWS. This key is needed for the Terraform deployment. This key is referenced by name and linked to the EC2 instance. Terraform can be used by using *terraform init*, followed by *terraform apply*. The app itself is hosted in a Docker container that sits in the EC2 instance. After creating a Docker build image, it is manually placed in the EC2 instance and run.

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { calculateCheapestRoute } from '../Home/actions'
 import MyLocationIcon from '@mui/icons-material/MyLocation'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
 import EastIcon from '@mui/icons-material/East'
 import { IRoute } from '@/interfaces/travel'
 import ItineraryCard from './ItineraryCard'
@@ -64,7 +63,11 @@ const RoutePlanner = ({
   }
 
   const handleExpandedState = (code: number) => {
-    code === expandedHistory ? setExpandedHistory(0) : setExpandedHistory(code)
+    if (code === expandedHistory) {
+      setExpandedHistory(0) 
+    } else {
+      setExpandedHistory(code)
+    }
   }
 
   const saveToLocalStore = () => {
@@ -85,10 +88,6 @@ const RoutePlanner = ({
     setHistoricRoutes(getLocalTrips())
   }, [])
 
-  useEffect(() => {
-    console.log('triggered')
-  }, [historicRoutes])
-  
   return (
     <>
       <form onSubmit={e => handleSubmit(e)}>

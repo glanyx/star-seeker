@@ -1,6 +1,4 @@
 import { IRoute } from "@/interfaces/travel"
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch'
-import EastIcon from '@mui/icons-material/East'
 import RouteDetails from "./RouteDetails"
 
 interface IItineraryCardProps {

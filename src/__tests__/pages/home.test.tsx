@@ -1,8 +1,7 @@
-import React, { act } from 'react'
+import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import Home from '@/app/page'
 import { IGate } from '@/interfaces/travel'
-import { fetchGateDetails } from '@/components/Home/actions'
 import { useRouter } from 'next/navigation'
 
 const testData: IGate = {
@@ -51,8 +50,6 @@ describe('Home', () => {
   })
 
   it('lists api response', async () => {
-
-    await act(async () => { fetchGateDetails })
 
     setTimeout(async () => {
       const row = await screen.findByText(/SOL$/i)

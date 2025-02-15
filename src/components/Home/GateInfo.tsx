@@ -20,8 +20,12 @@ const GateInfo = ({
   const [detailsLoading, setDetailsLoading] = useState<boolean>(false)
 
   const handleExpandedState = (code: string) => {
-    code !== expanded && setDetailsLoading(true);
-    code === expanded ? setExpanded('') : setExpanded(code)
+    if (code !== expanded) setDetailsLoading(true);
+    if (code === expanded) {
+      setExpanded('')
+    } else {
+      setExpanded(code)
+    }
   }
 
   const parseTimestamp = (timestamp: number) => {
