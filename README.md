@@ -53,3 +53,9 @@ I also edited the standard Layout to always include the website logo, as well as
 The API information is currently stored in the compose.yaml file. Of course, this is not a good implementation, however it is also not a real-world scenario where the key is predefined for everyone at one specific value.
 
 In terms of deployment, first a private key was generated on AWS. This key is needed for the Terraform deployment. This key is referenced by name and linked to the EC2 instance. Terraform can be used by using *terraform init*, followed by *terraform apply*. The app itself is hosted in a Docker container that sits in the EC2 instance. After creating a Docker build image, it is manually placed in the EC2 instance and run.
+
+```bash
+terraform init
+terraform validate
+terraform apply
+```
