@@ -59,3 +59,10 @@ terraform init
 terraform validate
 terraform apply
 ```
+
+Docker build is created by using the build command. After uploading it to the EC2 instance, it can be run by using the run command in detached mode and forwarding port 80 to 3000 in the container.
+
+```bash
+docker compose up --build
+docker run -d -p 80:3000 star-seeker-nextjs:latest
+```
