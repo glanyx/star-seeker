@@ -50,7 +50,7 @@ const GateInfo = ({
   }, [expanded])
 
   return(
-    <div className='table-auto overflow-x-auto bg-neutral-800 rounded-lg w-1/2'>
+    <div className='table-auto overflow-x-auto bg-neutral-800 sm:rounded-lg w-full md:w-1/2'>
       <table className='w-full text-md text-left rtl:text-right text-gray-400 overflow-hidden'>
         <thead className='uppercase bg-gray-700 text-gray-400'>
           <tr>
@@ -90,7 +90,7 @@ const GateInfo = ({
                               <td className='px-6 py-3'>{gateDetails.uuid}</td>
                               <td className='px-6 py-3'>{`${parseTimestamp(gateDetails.createdAt)}`}</td>
                               <td className='px-6 py-3'>{gateDetails.updatedAt ? parseTimestamp(gateDetails.updatedAt) : 'Never'}</td>
-                              <td className='px-6 py-3'>{gateDetails.links?.length > 0 ? gateDetails.links.map(l => l.code).join(', ') : 'None'}</td>
+                              <td className='px-6 py-3 whitespace-pre'>{gateDetails.links?.length > 0 ? gateDetails.links.map(l => `${l.code} (${l.hu} HU)`).join('\n') : 'None'}</td>
                             </tr>
                           </tbody>
                         </table>

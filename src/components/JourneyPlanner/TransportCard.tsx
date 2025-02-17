@@ -9,8 +9,8 @@ const TransportCard = ({
 }: ITransportCardProps) => {
 
   return(
-    <div className='w-full flex flex-row justify-center'>
-      <p className='font-bold content-center px-8'>Cheapest!</p>
+    <div className='w-full flex flex-row justify-center p-8 gap-4'>
+      <p className='font-bold content-center'>Cheapest!</p>
       <div className='sm:w-full md:w-1/2 lg:w-1/4 text-white flex flex-col'>
         <div className='w-full flex flex-row pb-2'>
           <div className='w-3/4 flex flex-col'>

@@ -91,7 +91,7 @@ const RoutePlanner = ({
   return (
     <>
       <form onSubmit={e => handleSubmit(e)}>
-        <div className='flex flex-col md:flex-row w-full justify-center'>
+        <div className='flex flex-col md:flex-row w-full justify-center gap-6'>
           <div className='grid gap-6 grid-cols-1 md:grid-cols-2'>
             <InputField
               name='from'
@@ -111,7 +111,7 @@ const RoutePlanner = ({
             />
           </div>
           <div className='w-0'>
-            <button aria-label='search' className='mt-6 ml-0 md:mt-0 md:ml-6 px-4 py-3 bg-gray-700 hover:bg-gray-500 rounded-lg uppercase disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
+            <button aria-label='search' className='px-4 py-3 bg-gray-700 hover:bg-gray-500 rounded-lg uppercase disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50'
               type='submit'
               disabled={loading}
             >
@@ -128,7 +128,7 @@ const RoutePlanner = ({
           />
         }
       </>
-      <div className='sm:w-full md:w-1/2 rounded-lg bg-gray-700 mt-20'>
+      <div className='w-full md:w-1/2 sm:rounded-lg bg-gray-700 mt-20'>
         <div className='w-full bg-stone-800 p-4 rounded-t-lg'>
           <p className='font-bold'>History</p>
         </div>
