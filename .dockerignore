@@ -32,3 +32,16 @@
 **/dist
 LICENSE
 README.md
+
+# Terraform
+
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+
+.terraform
+**/.idea
+**/*.iml
+
+*.tfvars
+*.tfvars.json
