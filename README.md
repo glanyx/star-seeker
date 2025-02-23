@@ -58,13 +58,4 @@ terraform validate
 terraform apply
 ```
 
-Docker build is created by using the build command. After authenticating with AWS, it is then pushed to AWS ECR.
-
-```bash
-docker build -t star-seeker-nextapp .
-aws ecr get-login-password --region \[your_aws_region\] | docker login --username AWS --password-stdin \[your_aws_account_id\].dkr.ecr.eu-west-2.amazonaws.com
-docker tag star-seeker-nextapp:latest \[your_aws_account_id\].dkr.ecr.eu-west-2.amazonaws.com/star-seeker-nextapp:latest
-docker push \[your_aws_account_id\].dkr.ecr.eu-west-2.amazonaws.com/star-seeker-nextapp:latest
-```
-
-Deploying a new build can be achieved by executing the above Docker commands again, and manually stopping the existing tasks, to force use of the latest image. Next step is to use GitHub Actions to automate creating a new build and automatically have it force a new deployment.
+Deploying the newest build is also completely automated, resulting in a fully automated CI/CD pipeline. Github Actions automatically starts a new Docker build whenever new code is pushed to the `master` branch. This build is pushed to the repository configured in the workflow file. To be able to use this workflow, a user must be configured on AWS IAM with sufficient policies to the EC2 Container Registry and ECS. This user will need access keys, with a key configured as a secret on the relevant Github repository.
