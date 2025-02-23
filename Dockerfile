@@ -42,14 +42,6 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 # Copy the rest of the source files into the image.
 COPY . .
-
-# Env variables
-ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
-ARG NEXT_PUBLIC_X_API_KEY
-ENV NEXT_PUBLIC_X_API_KEY=${NEXT_PUBLIC_X_API_KEY}
-
-
 # Run the build script.
 RUN npm run build
 

@@ -1,4 +1,4 @@
-Welcome to [Star Seeker](http://ec2-13-40-33-185.eu-west-2.compute.amazonaws.com/), an application developed by Hyperspace Tunneling Corp., with [Next.js](https://nextjs.org), and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Welcome to [Star Seeker](star-seeker-load-balancer-1543905369.eu-west-2.elb.amazonaws.com), an application developed by Hyperspace Tunneling Corp., with [Next.js](https://nextjs.org), and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 Thank you for choosing us to plan your interstellar journey. We couldn't be more pleased to take your credits. Err, help you with your trip across the stars! Start your cosmic adventure now!
 
@@ -38,7 +38,7 @@ Instructions on how the use the platform are listed above.
 
 I opted to using axios as my main way to connect to the API. Axios is a library I am most familiar with and seemed to fit the purpose quite well in connecting to the external API. In the code I intercept every request and inject the *x-api-key*. A similar method can be used for any form of authentication.
 
-The API key and URL are stored as environment variables with dotenv.
+The API key and URL are stored as environment variables with dotenv. In a similar way, they are added as environment variables with the terraform deployment, and configured for the container hosted on Fargate. They are configured in the .env file for local usage, and in the terraform.tfvars file for terraform deployment.
 
 Jest is being used for the Unit Tests. I do, however, fear I may have overdone it with the axios implementation, as I was facing various difficulties with mocking the axios responses. For that reason, and taking the time intended to dedicated to this project into account, I have decided to forego some of these units tests. With additional time, this is definitely something I would be looking into testing properly.
 
@@ -50,9 +50,7 @@ The website is designed in a responsive way, thanks to the utilisation of Tailwi
 
 I also edited the standard Layout to always include the website logo, as well as including a Footer component that always directs to the Homepage. All parts of the application can be reached from the Homepage.
 
-The API information is currently stored in the compose.yaml file. Of course, this is not a good implementation, however it is also not a real-world scenario where the key is predefined for everyone at one specific value.
-
-In terms of deployment, first a private key was generated on AWS. This key is needed for the Terraform deployment. This key is referenced by name and linked to the EC2 instance. Terraform can be used by using *terraform init*, followed by *terraform apply*. The app itself is hosted in a Docker container that sits in the EC2 instance. After creating a Docker build image, it is manually placed in the EC2 instance and run.
+In terms of deployment, the entire infrastructure is fully automated through terraform, other than redeployment. The application is dockerized and hosted through AWS ECS Fargate. The image for the container is hosted on AWs ECR. There are actually 3 instances being hosted, one for each of the availability zones in the eu-west-2 region (London). These sit behind an Application Load Balancer that can direct incoming web traffic. The only manual process, currently, is to build a new Docker image, push it to the ECR, and force a new task deployment.
 
 ```bash
 terraform init
@@ -60,9 +58,13 @@ terraform validate
 terraform apply
 ```
 
-Docker build is created by using the build command. After uploading it to the EC2 instance, it can be run by using the run command in detached mode and forwarding port 80 to 3000 in the container.
+Docker build is created by using the build command. After authenticating with AWS, it is then pushed to AWS ECR.
 
 ```bash
-docker compose up --build
-docker run -d -p 80:3000 star-seeker-nextjs:latest
+docker build -t star-seeker-nextapp .
+aws ecr get-login-password --region \[your_aws_region\] | docker login --username AWS --password-stdin \[your_aws_account_id\].dkr.ecr.eu-west-2.amazonaws.com
+docker tag star-seeker-nextapp:latest \[your_aws_account_id\].dkr.ecr.eu-west-2.amazonaws.com/star-seeker-nextapp:latest
+docker push \[your_aws_account_id\].dkr.ecr.eu-west-2.amazonaws.com/star-seeker-nextapp:latest
 ```
+
+Deploying a new build can be achieved by executing the above Docker commands again, and manually stopping the existing tasks, to force use of the latest image. Next step is to use GitHub Actions to automate creating a new build and automatically have it force a new deployment.
